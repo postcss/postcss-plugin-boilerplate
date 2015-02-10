@@ -7,8 +7,8 @@ module.exports = function (opts) {
 
         // Transform CSS AST here
 
-    }
+    };
 };
 module.exports.postcss = function (css) {
     return module.exports()(css);
-}
+};

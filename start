@@ -1,0 +1,79 @@
+#!/usr/bin/env node
+
+var exec = require('child_process').exec;
+var path = require('path');
+var fs   = require('fs');
+
+process.stdin.resume();
+process.stdin.setEncoding('utf8');
+
+var questionCallback = null;
+
+process.stdin.on('data', function (text) {
+    questionCallback(text.trim());
+});
+
+var questions = {
+    AUTHOR_NAME:  'Your name: \n',
+    AUTHOR_EMAIL: 'Your email: \n',
+    GITHUB_NAME:  'GitHub username: \n',
+    PLUGIN_NAME:  'Plugin name: \n',
+    PLUGIN_DESC:  'Finish sentence with plugin description:\nPostCSS plugin ',
+    KEYWORDS:     'Finish plugin keywords:\npostcss, css, '
+};
+var answers = { };
+
+var lastQuestion = 0;
+nextQuestion = function () {
+    var code = Object.keys(questions)[lastQuestion];
+    if ( code ) {
+        process.stdout.write('\n' + questions[code]);
+        questionCallback = function (result) {
+            if ( result === '' ) {
+                nextQuestion();
+            } else {
+                answers[code] = result;
+                lastQuestion += 1;
+                nextQuestion();
+            }
+        };
+
+    } else {
+        answers.KEYWORDS = ', ' + answers.KEYWORDS.split(/,\s*/)
+            .map(function (i) { return '"' + i + '"'; }).join(', ');
+        fillFiles(__dirname);
+        cleanRepo(function () {
+            process.exit(0);
+        });
+    }
+
+};
+nextQuestion();
+
+var fillFiles = function (dir) {
+    fs.readdirSync(dir).forEach(function (file) {
+        if ( file == '.git' ) return;
+
+        var filepath = path.join(dir, file);
+        if ( fs.lstatSync(filepath).isDirectory() ) {
+            fillFiles(filepath);
+
+        } else {
+            var content = fs.readFileSync(filepath).toString();
+            for ( var code in answers ) {
+                while ( content.indexOf(code) != -1 ) {
+                    content = content.replace(code, answers[code]);
+                }
+            }
+            fs.writeFileSync(filepath, content);
+        }
+    });
+};
+
+var cleanRepo = function (callback) {
+    var readme = path.join(__dirname, 'README.md');
+    fs.unlinkSync(readme);
+    fs.renameSync(readme + '.example', readme);
+    fs.unlinkSync(path.join(__dirname, 'start'));
+    exec('cd ' + __dirname + ' && rm -Rf .git/ && git init', callback);
+};
