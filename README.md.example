@@ -1,0 +1,26 @@
+# PostCSS Size [![Build Status](https://travis-ci.org/GITHUB_NAME/PLUGIN_NAME.svg)](https://travis-ci.org/GITHUB_NAME/PLUGIN_NAME)
+
+
+[PostCSS] plugin PLUGIN_DESC.
+
+[PostCSS]: https://github.com/postcss/postcss
+
+```css
+.foo {
+    /* Input example */
+}
+```
+
+```css
+.foo {
+  /* Output example */
+}
+```
+
+## Usage
+
+```js
+postcss([ require('PLUGIN_NAME') ])
+```
+
+See [PostCSS] docs for examples for your environment.
