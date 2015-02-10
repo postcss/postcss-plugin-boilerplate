@@ -1,5 +1,5 @@
 module.exports = function (opts) {
-    if ( typeof(opts) == 'undefined' ) opts = { };
+    opts = opts || {};
 
     // Work with options here
 
