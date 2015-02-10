@@ -1,6 +1,6 @@
 # PostCSS Plugin Boilerplate
 
-<img align="right" width="95" height="95" src="http://postcss.github.io/postcss/logo.svg" title="Philosopher’s stone, logo of PostCSS">
+<img align="right" width="135" height="95" src="http://postcss.github.io/postcss/logo-leftp.png" title="Philosopher’s stone, logo of PostCSS">
 
 Boilerplate repoitory to start PostCSS plugin by few steps.
 
