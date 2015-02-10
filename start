@@ -14,12 +14,12 @@ process.stdin.on('data', function (text) {
 });
 
 var questions = {
-    AUTHOR_NAME:  'Your name: \n',
-    AUTHOR_EMAIL: 'Your email: \n',
-    GITHUB_NAME:  'GitHub username: \n',
-    PLUGIN_NAME:  'Plugin name: \n',
-    PLUGIN_DESC:  'Finish sentence with plugin description:\nPostCSS plugin ',
-    KEYWORDS:     'Finish plugin keywords:\npostcss, css, '
+    AUTHOR_NAME:  'Your name: ',
+    AUTHOR_EMAIL: 'Your email: ',
+    GITHUB_NAME:  'GitHub username: ',
+    PLUGIN_NAME:  'Plugin name: postcss-',
+    PLUGIN_DESC:  '\nFinish sentence with plugin description:\nPostCSS plugin ',
+    KEYWORDS:     '\nFinish plugin keywords:\npostcss, css, '
 };
 var answers = { };
 
@@ -27,7 +27,7 @@ var lastQuestion = 0;
 nextQuestion = function () {
     var code = Object.keys(questions)[lastQuestion];
     if ( code ) {
-        process.stdout.write('\n' + questions[code]);
+        process.stdout.write(questions[code]);
         questionCallback = function (result) {
             if ( result === '' ) {
                 nextQuestion();
@@ -39,8 +39,19 @@ nextQuestion = function () {
         };
 
     } else {
-        answers.KEYWORDS = ', ' + answers.KEYWORDS.split(/,\s*/)
-            .map(function (i) { return '"' + i + '"'; }).join(', ');
+        answers.PLUGIN_NAME = 'postcss-' + answers.PLUGIN_NAME;
+        answers.PLUGIN_TITLE = answers.PLUGIN_NAME
+            .replace(/-\w/g, function (str) {
+                return ' ' + str[1].toUpperCase();
+            })
+            .replace(/^postcss/, 'PostCSS');
+        answers.KEYWORDS = ', ' + answers.KEYWORDS
+            .split(/,\s*/)
+            .map(function (i) {
+                return '"' + i + '"';
+            })
+            .join(', ');
+
         fillFiles(__dirname);
         cleanRepo(function () {
             process.exit(0);
