@@ -42,3 +42,5 @@ Boilerplate repoitory to start PostCSS plugin by few steps.
 9. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to
    [Plugins section](https://github.com/postcss/postcss#plugins) in `README.md`
    and send a pull request.
+
+10. Follow [@PostCSS](https://twitter.com/postcss) to get latest updates.
