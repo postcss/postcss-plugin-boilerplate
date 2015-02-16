@@ -33,7 +33,7 @@ Boilerplate repoitory to start PostCSS plugin by few steps.
 7. Check your code:
 
     ```sh
-   ./node_modules/.bin/gulp
+   npm test
     ```
 
 8. Add input and output CSS examples to `README.md`. Add options descriptions
