@@ -21,22 +21,49 @@ var questions = {
     PLUGIN_DESC:  '\nFinish sentence with plugin description:\nPostCSS plugin ',
     KEYWORDS:     '\nFinish plugin keywords:\npostcss, css, '
 };
+var autodetects = {
+    AUTHOR_NAME:  'git config user.name',
+    AUTHOR_EMAIL: 'git config user.email'
+};
 var answers = { };
+
+var autodetect = function (code, callback) {
+    var command = autodetects[code];
+    if ( !command ) return callback();
+
+    try {
+        exec(command, function (_, stdout) {
+            var value = stdout.trim();
+            if ( value ) {
+                process.stdout.write(questions[code] + value + '\n');
+                answers[code] = value;
+                lastQuestion += 1;
+                nextQuestion();
+            } else {
+                callback();
+            }
+        });
+    } catch (error) {
+        callback()
+    }
+};
 
 var lastQuestion = 0;
 nextQuestion = function () {
     var code = Object.keys(questions)[lastQuestion];
     if ( code ) {
-        process.stdout.write(questions[code]);
-        questionCallback = function (result) {
-            if ( result === '' ) {
-                nextQuestion();
-            } else {
-                answers[code] = result;
-                lastQuestion += 1;
-                nextQuestion();
-            }
-        };
+        autodetect(code, function () {
+            process.stdout.write(questions[code]);
+            questionCallback = function (result) {
+                if ( result === '' ) {
+                    nextQuestion();
+                } else {
+                    answers[code] = result;
+                    lastQuestion += 1;
+                    nextQuestion();
+                }
+            };
+        });
 
     } else {
         answers.PLUGIN_NAME = 'postcss-' + answers.PLUGIN_NAME;
