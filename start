@@ -54,7 +54,9 @@ nextQuestion = function () {
 
         fillFiles(__dirname);
         cleanRepo(function () {
-            process.exit(0);
+            renameProject(function () {
+                process.exit(0);
+            });
         });
     }
 
@@ -86,5 +88,11 @@ var cleanRepo = function (callback) {
     fs.unlinkSync(readme);
     fs.renameSync(readme + '.example', readme);
     fs.unlinkSync(path.join(__dirname, 'start'));
-    exec('cd ' + __dirname + ' && rm -Rf .git/ && git init', callback);
+    exec('cd "' + __dirname + '" && rm -Rf .git/ && git init', callback);
+};
+
+var renameProject = function (callback) {
+    var dir = __dirname.replace(/postcss-plugin-boilerplate$/,
+                                answers.PLUGIN_NAME);
+    exec('mv "' + __dirname + '" "' + dir + '"', callback);
 };

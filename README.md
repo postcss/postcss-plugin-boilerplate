@@ -14,7 +14,7 @@ Boilerplate repoitory to start PostCSS plugin by few steps.
    files with your data.
 
     ```sh
-   ./start
+   ./postcss-plugin-boilerplate/start
     ```
 
 3. Now it is repository of your plugin with clean Git history.
