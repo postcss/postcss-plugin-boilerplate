@@ -1,4 +1,6 @@
-module.exports = function (opts) {
+var postcss = require('postcss');
+
+module.exports = postcss.plugin('PLUGIN_NAME', function (opts) {
     opts = opts || {};
 
     // Work with options here
@@ -8,7 +10,4 @@ module.exports = function (opts) {
         // Transform CSS AST here
 
     };
-};
-module.exports.postcss = function (css) {
-    return module.exports()(css);
-};
+});
