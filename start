@@ -19,7 +19,7 @@ var questions = {
     GITHUB_NAME:  'GitHub username: ',
     PLUGIN_NAME:  'Plugin name: postcss-',
     PLUGIN_DESC:  '\nFinish sentence with plugin description:\nPostCSS plugin ',
-    KEYWORDS:     '\nFinish plugin keywords:\npostcss, css, '
+    KEYWORDS:     '\nFinish plugin keywords:\npostcss, css, postcssplugin, '
 };
 var autodetects = {
     AUTHOR_NAME:  'git config user.name',
