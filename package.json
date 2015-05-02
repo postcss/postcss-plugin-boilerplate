@@ -2,7 +2,7 @@
     "name": "PLUGIN_NAME",
     "version": "0.0.0",
     "description": "PostCSS plugin PLUGIN_DESC",
-    "keywords": ["postcss", "css", "postcssplugin"KEYWORDS],
+    "keywords": ["postcss", "css", "postcss-plugin"KEYWORDS],
     "author": "AUTHOR_NAME <AUTHOR_EMAIL>",
     "license": "MIT",
     "repository": {
