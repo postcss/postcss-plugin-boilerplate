@@ -1,6 +1,8 @@
 # PostCSS Plugin Boilerplate
 
-<img align="right" width="135" height="95" src="http://postcss.github.io/postcss/logo-leftp.png" title="Philosopher’s stone, logo of PostCSS">
+<img align="right" width="135" height="95"
+     title="Philosopher’s stone, logo of PostCSS"
+     src="http://postcss.github.io/postcss/logo-leftp.png">
 
 Boilerplate repoitory to start PostCSS plugin by few steps.
 
@@ -39,8 +41,10 @@ Boilerplate repoitory to start PostCSS plugin by few steps.
 8. Add input and output CSS examples to `README.md`. Add options descriptions
    if your plugin has them.
 
-9. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to
+9. Fill `CHANGELOG.md` with initial version and release it to npm.
+
+10. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to
    [Plugins section](https://github.com/postcss/postcss#plugins) in `README.md`
    and send a pull request.
 
-10. Follow [@PostCSS](https://twitter.com/postcss) to get latest updates.
+11. Follow [@PostCSS](https://twitter.com/postcss) to get latest updates.

@@ -1,8 +1,10 @@
-# PLUGIN_TITLE [![Build Status](https://travis-ci.org/GITHUB_NAME/PLUGIN_NAME.svg)](https://travis-ci.org/GITHUB_NAME/PLUGIN_NAME)
+# PLUGIN_TITLE [![Build Status][ci-img]][ci]
 
 [PostCSS] plugin PLUGIN_DESC.
 
 [PostCSS]: https://github.com/postcss/postcss
+[ci-img]:  https://travis-ci.org/GITHUB_NAME/PLUGIN_NAME.svg
+[ci]:      https://travis-ci.org/GITHUB_NAME/PLUGIN_NAME
 
 ```css
 .foo {
