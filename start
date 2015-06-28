@@ -72,12 +72,12 @@ nextQuestion = function () {
                 return ' ' + str[1].toUpperCase();
             })
             .replace(/^postcss/, 'PostCSS');
-        answers.KEYWORDS = ', ' + answers.KEYWORDS
-            .split(/,\s*/)
+        answers.KEYWORDS = ',\n    ' + answers.KEYWORDS
+            .split(',')
             .map(function (i) {
-                return '"' + i + '"';
+                return '"' + i.trim() + '"';
             })
-            .join(', ');
+            .join(',\n    ');
 
         fillFiles(__dirname);
         cleanRepo(function () {
