@@ -4,8 +4,7 @@
      title="Philosopher’s stone, logo of PostCSS"
      src="http://postcss.github.io/postcss/logo-leftp.png">
 
-This is the boilerplate repository used to create new PostCSS plugins
-in a few steps.
+Сreate new PostCSS plugins in a few steps:
 
 1. Clone this repository:
 
@@ -13,8 +12,8 @@ in a few steps.
   git clone https://github.com/postcss/postcss-plugin-boilerplate.git
    ```
 
-2. Execute the wizard script. It will ask you a few questions and fill all
-   files with your data.
+2. Execute the wizard script. It will ask you a few questions
+   and fill all files with your data.
 
     ```sh
    ./postcss-plugin-boilerplate/start
@@ -22,7 +21,7 @@ in a few steps.
 
 3. Your plugin repository will now have a clean Git history.
    [Create the GitHub repository](https://github.com/new)
-   and push your project there.
+   and push your project there.
 
 4. Add your project to [Travis CI](https://travis-ci.org).
 
@@ -40,13 +39,14 @@ in a few steps.
    npm test
     ```
 
-8. Add input and output CSS examples to `README.md`. Add options descriptions
-   if your plugin has them.
+8. Add input and output CSS examples to `README.md`.
 
-9. Fill `CHANGELOG.md` with initial version and release it to npm.
+9. Add options descriptions if your plugin has them.
 
-10. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to
+10. Fill `CHANGELOG.md` with initial version and release it to npm.
+
+11. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to
    [Plugins section](https://github.com/postcss/postcss#plugins) in `README.md`,
    and send a pull request.
 
-11. Follow [@PostCSS](https://twitter.com/postcss) to get the latest updates.
+12. Follow [@PostCSS](https://twitter.com/postcss) to get the latest updates.
