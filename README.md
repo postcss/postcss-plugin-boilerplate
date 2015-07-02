@@ -4,8 +4,8 @@
      title="Philosopher’s stone, logo of PostCSS"
      src="http://postcss.github.io/postcss/logo-leftp.png">
 
-This is the boilerplate repository used to create new PostCSS plugins in a few 
-steps.
+This is the boilerplate repository used to create new PostCSS plugins
+in a few steps.
 
 1. Clone this repository:
 
@@ -21,8 +21,8 @@ steps.
     ```
 
 3. Your plugin repository will now have a clean Git history.
-   [Create the GitHub repository](https://github.com/new) and push your project
-   there.
+   [Create the GitHub repository](https://github.com/new)
+   and push your project there.
 
 4. Add your project to [Travis CI](https://travis-ci.org).
 
