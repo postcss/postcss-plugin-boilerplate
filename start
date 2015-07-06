@@ -82,7 +82,9 @@ nextQuestion = function () {
         fillFiles(__dirname);
         cleanRepo(function () {
             renameProject(function () {
-                process.exit(0);
+                installDependencies(function () {
+                    process.exit(0);
+                });
             });
         });
     }
@@ -122,4 +124,8 @@ var renameProject = function (callback) {
     var dir = __dirname.replace(/postcss-plugin-boilerplate$/,
                                 answers.PLUGIN_NAME);
     exec('mv "' + __dirname + '" "' + dir + '"', callback);
+};
+
+var installDependencies = function (callback) {
+    exec('npm i', callback);
 };
