@@ -25,6 +25,7 @@
     "gulp": "^3.9.0",
     "gulp-eslint": "^0.14.0",
     "gulp-mocha": "^2.1.2"
+    "gulp-plumber": "^1.0.1"
   },
   "scripts": {
     "test": "gulp"
