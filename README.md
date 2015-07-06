@@ -25,28 +25,20 @@
 
 4. Add your project to [Travis CI](https://travis-ci.org).
 
-5. Install npm packages:
+5. Start gulp watcher:
+     ```sh
+    gulp watch
+     ```
+6. Write some code to `index.js` and tests to `test/test.js`. You will see the test and lint results in your gulp terminal session.
 
-    ```sh
-   npm install
-    ```
+7. Add input and output CSS examples to `README.md`.
 
-6. Write some code to `index.js` and tests to `test/test.js`.
+8. Add options descriptions if your plugin has them.
 
-7. Check your code:
+9. Fill `CHANGELOG.md` with initial version and release it to npm.
 
-    ```sh
-   npm test
-    ```
-
-8. Add input and output CSS examples to `README.md`.
-
-9. Add options descriptions if your plugin has them.
-
-10. Fill `CHANGELOG.md` with initial version and release it to npm.
-
-11. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to
+10. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to
    [Plugins section](https://github.com/postcss/postcss#plugins) in `README.md`,
    and send a pull request.
 
-12. Follow [@PostCSS](https://twitter.com/postcss) to get the latest updates.
+11. Follow [@PostCSS](https://twitter.com/postcss) to get the latest updates.
