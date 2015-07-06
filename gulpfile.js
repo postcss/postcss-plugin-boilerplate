@@ -1,22 +1,19 @@
 var gulp = require('gulp');
-var plumber = require('gulp-plumber');
 
 files = ['index.js', 'test/*.js', 'gulpfile.js'];
 
-gulp.task('lint', function () {
+gulp.task('lint', function (done) {
     var eslint = require('gulp-eslint');
     return gulp.src(files)
-        .pipe(plumber())
         .pipe(eslint())
         .pipe(eslint.format())
-        .pipe(eslint.failAfterError());
+        .pipe(eslint.failAfterError()).on('error', done);
 });
 
-gulp.task('test', function () {
+gulp.task('test', function (done) {
     var mocha = require('gulp-mocha');
     return gulp.src('test/*.js', { read: false })
-        .pipe(plumber())
-        .pipe(mocha());
+        .pipe(mocha()).on('error', done);
 });
 
 gulp.task('default', ['lint', 'test']);
