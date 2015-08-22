@@ -5,7 +5,7 @@ module.exports = postcss.plugin('PLUGIN_NAME', function (opts) {
 
     // Work with options here
 
-    return function (css) {
+    return function (css, result) {
 
         // Transform CSS AST here
 
