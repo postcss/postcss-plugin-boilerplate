@@ -1,4 +1,5 @@
-var gulp = require('gulp');
+var plumber = require('gulp-plumber');
+var gulp    = require('gulp');
 
 var files = ['index.js', 'test/*.js', 'gulpfile.js'];
 
