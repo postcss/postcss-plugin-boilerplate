@@ -79,10 +79,14 @@ nextQuestion = function () {
             })
             .join(',\n    ');
 
-        fillFiles(__dirname);
-        cleanRepo(function () {
-            renameProject(function () {
-                installDependencies(function () {
+        var dir = path.join(__dirname, '..', answers.PLUGIN_NAME)
+        copyDir(dir, function () {
+            fillFiles(dir);
+            cleanRepo(dir, function () {
+                initProject(dir, function () {
+                    process.stdout.write(
+                        '\nDone. Remove this dir and continue work in ' +
+                        '../' + answers.PLUGIN_NAME + '/\n');
                     process.exit(0);
                 });
             });
@@ -92,7 +96,11 @@ nextQuestion = function () {
 };
 nextQuestion();
 
-var fillFiles = function (dir) {
+function copyDir(dir, callback) {
+    exec('cp -R "' + __dirname + '" "' + dir + '"', callback);
+}
+
+function fillFiles(dir) {
     fs.readdirSync(dir).forEach(function (file) {
         if ( file == '.git' ) return;
 
@@ -110,22 +118,17 @@ var fillFiles = function (dir) {
             fs.writeFileSync(filepath, content);
         }
     });
-};
+}
 
-var cleanRepo = function (callback) {
-    var readme = path.join(__dirname, 'README.md');
-    fs.unlinkSync(readme);
+function cleanRepo(dir, callback) {
+    var readme = path.join(dir, 'README.md');
     fs.renameSync(readme + '.example', readme);
-    fs.unlinkSync(path.join(__dirname, 'start'));
-    exec('cd "' + __dirname + '" && rm -Rf .git/ && git init', callback);
-};
+    fs.unlinkSync(readme);
+    fs.unlinkSync(path.join(dir, 'start'));
+    exec('cd "' + dir + '" && rm -Rf .git/', callback);
+}
 
-var renameProject = function (callback) {
-    var dir = __dirname.replace(/postcss-plugin-boilerplate$/,
-                                answers.PLUGIN_NAME);
-    exec('mv "' + __dirname + '" "' + dir + '"', callback);
-};
-
-var installDependencies = function (callback) {
-    exec('npm i', callback);
-};
+function initProject(dir, callback) {
+    process.stdout.write('\nInstalling npm packages...');
+    exec('cd "' + dir + '" && git init && npm install', callback);
+}
