@@ -8,6 +8,7 @@ process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
 var questionCallback = null;
+var lastQuestion     = 0;
 
 process.stdin.on('data', function (text) {
     questionCallback(text.trim());
@@ -27,7 +28,44 @@ var autodetects = {
 };
 var answers = { };
 
-var autodetect = function (code, callback) {
+function copyDir(dir, callback) {
+    exec('cp -R "' + __dirname + '" "' + dir + '"', callback);
+}
+
+function fillFiles(dir) {
+    fs.readdirSync(dir).forEach(function (file) {
+        if ( file === '.git' ) return;
+
+        var filepath = path.join(dir, file);
+        if ( fs.lstatSync(filepath).isDirectory() ) {
+            fillFiles(filepath);
+
+        } else {
+            var content = fs.readFileSync(filepath).toString();
+            for ( var code in answers ) {
+                while ( content.indexOf(code) !== -1 ) {
+                    content = content.replace(code, answers[code]);
+                }
+            }
+            fs.writeFileSync(filepath, content);
+        }
+    });
+}
+
+function cleanRepo(dir, callback) {
+    var readme = path.join(dir, 'README.md');
+    fs.renameSync(readme + '.example', readme);
+    fs.unlinkSync(readme);
+    fs.unlinkSync(path.join(dir, 'start'));
+    exec('cd "' + dir + '" && rm -Rf .git/', callback);
+}
+
+function initProject(dir, callback) {
+    process.stdout.write('\nInstalling npm packages...');
+    exec('cd "' + dir + '" && git init && npm install', callback);
+}
+
+function autodetect(code, callback) {
     var command = autodetects[code];
     if ( !command ) return callback();
 
@@ -44,12 +82,11 @@ var autodetect = function (code, callback) {
             }
         });
     } catch (error) {
-        callback()
+        callback();
     }
-};
+}
 
-var lastQuestion = 0;
-nextQuestion = function () {
+function nextQuestion() {
     var code = Object.keys(questions)[lastQuestion];
     if ( code ) {
         autodetect(code, function () {
@@ -79,7 +116,7 @@ nextQuestion = function () {
             })
             .join(',\n    ');
 
-        var dir = path.join(__dirname, '..', answers.PLUGIN_NAME)
+        var dir = path.join(__dirname, '..', answers.PLUGIN_NAME);
         copyDir(dir, function () {
             fillFiles(dir);
             cleanRepo(dir, function () {
@@ -93,42 +130,6 @@ nextQuestion = function () {
         });
     }
 
-};
+}
+
 nextQuestion();
-
-function copyDir(dir, callback) {
-    exec('cp -R "' + __dirname + '" "' + dir + '"', callback);
-}
-
-function fillFiles(dir) {
-    fs.readdirSync(dir).forEach(function (file) {
-        if ( file == '.git' ) return;
-
-        var filepath = path.join(dir, file);
-        if ( fs.lstatSync(filepath).isDirectory() ) {
-            fillFiles(filepath);
-
-        } else {
-            var content = fs.readFileSync(filepath).toString();
-            for ( var code in answers ) {
-                while ( content.indexOf(code) != -1 ) {
-                    content = content.replace(code, answers[code]);
-                }
-            }
-            fs.writeFileSync(filepath, content);
-        }
-    });
-}
-
-function cleanRepo(dir, callback) {
-    var readme = path.join(dir, 'README.md');
-    fs.renameSync(readme + '.example', readme);
-    fs.unlinkSync(readme);
-    fs.unlinkSync(path.join(dir, 'start'));
-    exec('cd "' + dir + '" && rm -Rf .git/', callback);
-}
-
-function initProject(dir, callback) {
-    process.stdout.write('\nInstalling npm packages...');
-    exec('cd "' + dir + '" && git init && npm install', callback);
-}

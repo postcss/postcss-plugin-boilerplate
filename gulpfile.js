@@ -1,5 +1,4 @@
-var plumber = require('gulp-plumber');
-var gulp    = require('gulp');
+var gulp = require('gulp');
 
 var files = ['index.js', 'test/*.js', 'gulpfile.js'];
 
@@ -19,6 +18,6 @@ gulp.task('test', function () {
 
 gulp.task('default', ['lint', 'test']);
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
     gulp.watch(files, ['lint', 'test']);
 });
