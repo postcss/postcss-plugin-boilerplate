@@ -54,8 +54,8 @@ function fillFiles(dir) {
 
 function cleanRepo(dir, callback) {
     var readme = path.join(dir, 'README.md');
-    fs.renameSync(readme + '.example', readme);
     fs.unlinkSync(readme);
+    fs.renameSync(readme + '.example', readme);
     fs.unlinkSync(path.join(dir, 'start'));
     exec('cd "' + dir + '" && rm -Rf .git/', callback);
 }
