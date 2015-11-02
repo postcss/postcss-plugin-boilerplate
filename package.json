@@ -1,29 +1,31 @@
 {
-  "name": "PLUGIN_NAME",
-  "version": "0.0.0",
-  "description": "PostCSS plugin PLUGIN_DESC",
+  "name": "postcss-plugin-boilerplate",
+  "version": "1.0.0",
+  "description": "PostCSS plugin",
   "keywords": [
     "postcss",
     "css",
-    "postcss-plugin"KEYWORDS
+    "postcss-plugin"
   ],
-  "author": "AUTHOR_NAME <AUTHOR_EMAIL>",
+  "author": "Andrey Sitnik <andrey@sitnik.ru>",
   "license": "MIT",
-  "repository": "GITHUB_NAME/PLUGIN_NAME",
+  "repository": "postcss/postcss-plugin-boilerplate",
   "bugs": {
-    "url": "https://github.com/GITHUB_NAME/PLUGIN_NAME/issues"
+    "url": "https://github.com/postcss/postcss-plugin-boilerplate/issues"
   },
-  "homepage": "https://github.com/GITHUB_NAME/PLUGIN_NAME",
+  "homepage": "https://github.com/postcss/postcss-plugin-boilerplate",
   "dependencies": {
-    "postcss": "^5.0.2"
+    "postcss": "^5.0.10"
   },
   "devDependencies": {
-    "chai": "^3.2.0",
-    "gulp": "^3.9.0",
-    "gulp-eslint": "^1.0.0",
-    "gulp-mocha": "^2.1.3"
+    "child-process-promise": "^1.1.0",
+    "fs-extra": "^0.26.0",
+    "fs-promise": "^0.3.1",
+    "git-user-info": "^1.0.0",
+    "inquirer": "^0.11.0"
   },
   "scripts": {
+    "postinstall": "node lib/install.js",
     "test": "gulp"
   }
 }
