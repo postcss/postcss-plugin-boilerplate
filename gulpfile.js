@@ -10,12 +10,6 @@ gulp.task('lint', function () {
         .pipe(eslint.failAfterError());
 });
 
-gulp.task('test', function () {
-    var mocha = require('gulp-mocha');
-    return gulp.src('test/*.js', { read: false })
-        .pipe(mocha());
-});
-
 gulp.task('default', ['lint', 'test']);
 
 gulp.task('watch', function () {
