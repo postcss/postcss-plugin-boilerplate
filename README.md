@@ -25,12 +25,9 @@
 
 4. Add your project to [Travis CI](https://travis-ci.org).
 
-5. Start gulp watcher:
-     ```sh
-    gulp watch
-     ```
-6. Write some code to `index.js` and tests to `test/test.js`.
-   You will see the test and lint results in your gulp terminal session.
+5. Write some code to `index.js` and tests to `test.js`.
+
+6. Execute `npm test` command
 
 7. Add input and output CSS examples to `README.md`.
 
