@@ -36,7 +36,7 @@
 9. Fill `CHANGELOG.md` with initial version and release it to npm.
 
 10. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to
-    [Plugins section](https://github.com/postcss/postcss#plugins)
+    [Plugins section](https://github.com/postcss/postcss/blob/master/docs/plugins.md)
     in `README.md`, and send a pull request.
 
 11. Follow [@PostCSS](https://twitter.com/postcss) to get the latest updates.
