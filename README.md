@@ -16,7 +16,7 @@
    and fill all files with your data.
 
     ```sh
-   ./postcss-plugin-boilerplate/start
+   node ./postcss-plugin-boilerplate/start
     ```
 
 3. Your plugin repository will now have a clean Git history.
