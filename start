@@ -28,8 +28,31 @@ var autodetects = {
 };
 var answers = { };
 
-function copyDir(dir, callback) {
-    exec('cp -R "' + __dirname + '" "' + dir + '"', callback);
+function copyFileSync(source, target) {
+    var targetFile = target;
+    if ( fs.existsSync(target) ) {
+        if ( fs.lstatSync(target).isDirectory() ) {
+            targetFile = path.join( target, path.basename(source) );
+        }
+    }
+    fs.writeFileSync(targetFile, fs.readFileSync(source));
+}
+
+function copyFolderSync(source, target) {
+    var files = [];
+    if ( !fs.existsSync(target) ) fs.mkdirSync(target);
+    if ( fs.lstatSync(source).isDirectory() ) {
+        files = fs.readdirSync(source);
+        files.forEach(function (file) {
+            var targetFile = path.join(target, file);
+            var curSource = path.join(source, file);
+            if ( fs.lstatSync(curSource).isDirectory() ) {
+                copyFolderSync(curSource, targetFile);
+            } else {
+                copyFileSync(curSource, target);
+            }
+        });
+    }
 }
 
 function fillFiles(dir) {
@@ -117,18 +140,17 @@ function nextQuestion() {
             .join(',\n    ');
 
         var dir = path.join(__dirname, '..', answers.PLUGIN_NAME);
-        copyDir(dir, function () {
-            fillFiles(dir);
-            cleanRepo(dir, function () {
-                initProject(dir, function () {
-                    process.stdout.write(
-                        '\nDone. Remove this dir and continue work in ' +
-                        '../' + answers.PLUGIN_NAME + '/\n');
-                    process.exit(0);
-                });
+        copyFolderSync(__dirname, dir);
+        fillFiles(dir);
+        cleanRepo(dir, function () {
+            initProject(dir, function () {
+                process.stdout.write(
+                    '\nDone. Remove this dir and continue work in ' +
+                    '../' + answers.PLUGIN_NAME + '/\n');
+                process.exit(0);
             });
         });
-    }
+}
 
 }
 
