@@ -14,6 +14,9 @@ process.stdin.on('data', function (text) {
     questionCallback(text.trim());
 });
 
+var noInstall = process.argv.some(function (i) {
+    return i === '--no-install';
+});
 var useYarn = process.argv.some(function (i) {
     return i === '--yarn';
 });
@@ -89,14 +92,18 @@ function cleanRepo(dir, callback) {
 
 function initProject(dir, callback) {
     var command = 'cd "' + dir + '" && git init && ';
-    if (useYarn) {
-        process.stdout.write('\nInstalling yarn packages...');
-        command += 'yarn install'
+    if (noInstall) {
+        callback()
     } else {
-        process.stdout.write('\nInstalling npm packages...');
-        command += 'npm install'
+        if (useYarn) {
+            process.stdout.write('\nInstalling yarn packages...');
+            command += 'yarn install'
+        } else {
+            process.stdout.write('\nInstalling npm packages...');
+            command += 'npm install'
+        }
+        exec(command, callback);
     }
-    exec(command, callback);
 }
 
 function autodetect(code, callback) {

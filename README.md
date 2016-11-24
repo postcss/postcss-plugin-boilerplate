@@ -26,6 +26,8 @@
    node ./postcss-plugin-boilerplate/start --yarn
     ```
 
+   Or use `--no-install` if you want to skip dependencies installation.
+
 3. Your plugin repository will now have a clean Git history.
    [Create the GitHub repository](https://github.com/new)
    and push your project there.
