@@ -15,11 +15,11 @@
   },
   "homepage": "https://github.com/GITHUB_NAME/PLUGIN_NAME",
   "dependencies": {
-    "postcss": "^5.2.5"
+    "postcss": "^5.2.6"
   },
   "devDependencies": {
-    "ava": "^0.16.0",
-    "eslint": "^3.9.0",
+    "ava": "^0.17.0",
+    "eslint": "^3.10.2",
     "eslint-config-postcss": "^2.0.2"
   },
   "scripts": {
