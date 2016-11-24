@@ -90,10 +90,10 @@ function cleanRepo(dir, callback) {
 function initProject(dir, callback) {
     var command = 'cd "' + dir + '" && git init && ';
     if (useYarn) {
-        process.stdout.write('\nInstalling npm packages...');
+        process.stdout.write('\nInstalling yarn packages...');
         command += 'yarn install'
     } else {
-        process.stdout.write('\nInstalling yarn packages...');
+        process.stdout.write('\nInstalling npm packages...');
         command += 'npm install'
     }
     exec(command, callback);
