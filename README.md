@@ -19,6 +19,13 @@
    node ./postcss-plugin-boilerplate/start
     ```
 
+   Call it with `--yarn` argument, if you prefer [yarn](https://yarnpkg.com/)
+   package manager:
+
+    ```sh
+   node ./postcss-plugin-boilerplate/start --yarn
+    ```
+
 3. Your plugin repository will now have a clean Git history.
    [Create the GitHub repository](https://github.com/new)
    and push your project there.
