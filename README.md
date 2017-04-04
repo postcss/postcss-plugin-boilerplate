@@ -8,29 +8,29 @@
 
 1. Clone this repository:
 
-   ```sh
-  git clone https://github.com/postcss/postcss-plugin-boilerplate.git
-   ```
+```sh
+git clone https://github.com/postcss/postcss-plugin-boilerplate.git
+```
 
 2. Execute the wizard script. It will ask you a few questions
    and fill all files with your data.
 
-    ```sh
-   node ./postcss-plugin-boilerplate/start
-    ```
+```sh
+node ./postcss-plugin-boilerplate/start
+```
 
-   Call it with `--yarn` argument, if you prefer [yarn](https://yarnpkg.com/)
-   package manager:
+Call it with `--yarn` argument, if you prefer [yarn](https://yarnpkg.com/)
+package manager:
 
-    ```sh
-   node ./postcss-plugin-boilerplate/start --yarn
-    ```
+```sh
+node ./postcss-plugin-boilerplate/start --yarn
+```
 
-   Or use `--no-install` if you want to skip dependencies installation.
+Or use `--no-install` if you want to skip dependencies installation.
 
 3. Your plugin repository will now have a clean Git history.
-   [Create the GitHub repository](https://github.com/new)
-   and push your project there.
+[Create the GitHub repository](https://github.com/new)
+and push your project there.
 
 4. Add your project to [Travis CI](https://travis-ci.org).
 
@@ -45,7 +45,7 @@
 9. Fill `CHANGELOG.md` with initial version and release it to npm.
 
 10. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to the
-    [Plugins list](https://github.com/postcss/postcss/blob/master/docs/plugins.md)
-    and send a pull request.
+[Plugins list](https://github.com/postcss/postcss/blob/master/docs/plugins.md)
+and send a pull request.
 
 11. Follow [@PostCSS](https://twitter.com/postcss) to get the latest updates.
