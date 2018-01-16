@@ -15,12 +15,12 @@
   },
   "homepage": "https://github.com/GITHUB_NAME/PLUGIN_NAME",
   "dependencies": {
-    "postcss": "^6.0.1"
+    "postcss": "^6.0.16"
   },
   "devDependencies": {
-    "eslint": "^3.19.0",
+    "eslint": "^4.15.0",
     "eslint-config-postcss": "^2.0.2",
-    "jest": "^20.0.0"
+    "jest": "^21.0.0"
   },
   "scripts": {
     "test": "jest && eslint *.js"
