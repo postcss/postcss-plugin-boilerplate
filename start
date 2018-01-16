@@ -87,7 +87,22 @@ function cleanRepo(dir, callback) {
     fs.unlinkSync(readme);
     fs.renameSync(readme + '.example', readme);
     fs.unlinkSync(path.join(dir, 'start'));
-    exec('cd "' + dir + '" && rm -Rf .git/', callback);
+    deleteFolderRecursive(path.join(dir, '.git'));
+    callback();
+}
+
+function deleteFolderRecursive(path){
+    if (fs.existsSync(path)) {
+        fs.readdirSync(path).forEach(function(file,index){
+            var curPath = path + '/' + file;
+            if(fs.lstatSync(curPath).isDirectory()){
+                deleteFolderRecursive(curPath);
+            } else {
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(path);
+    }
 }
 
 function initProject(dir, callback) {
