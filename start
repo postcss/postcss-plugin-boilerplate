@@ -91,14 +91,14 @@ function cleanRepo(dir, callback) {
     callback();
 }
 
-function deleteFolderRecursive(path){
-    if (fs.existsSync(path)) {
-        fs.readdirSync(path).forEach(function (file) {
-            var curPath = path + '/' + file;
-            if (fs.lstatSync(curPath).isDirectory()) {
-                deleteFolderRecursive(curPath);
+function deleteFolderRecursive(dir) {
+    if (fs.existsSync(dir)) {
+        fs.readdirSync(dir).forEach(function (file) {
+            var current = path.join(dir, file);
+            if (fs.lstatSync(current).isDirectory()) {
+                deleteFolderRecursive(current);
             } else {
-                fs.unlinkSync(curPath);
+                fs.unlinkSync(current);
             }
         });
         fs.rmdirSync(path);
