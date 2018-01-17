@@ -34,7 +34,7 @@ and push your project there.
 
 4. Add your project to [Travis CI](https://travis-ci.org).
 
-5. Write some code to `index.js` and tests to `test.js`.
+5. Write some code to `index.js` and tests to `index.test.js`.
 
 6. Execute `npm test` command
 
