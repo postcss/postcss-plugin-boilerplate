@@ -33,7 +33,9 @@ var autodetects = {
     AUTHOR_NAME:  'git config user.name',
     AUTHOR_EMAIL: 'git config user.email'
 };
-var answers = { };
+var answers = {
+    YEAR: (new Date()).getFullYear()
+};
 
 function copyFileSync(source, target) {
     var targetFile = target;
