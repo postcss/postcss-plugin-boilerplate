@@ -8,25 +8,25 @@
 
 1. Clone this repository:
 
-```sh
-git clone https://github.com/postcss/postcss-plugin-boilerplate.git
-```
+    ```sh
+    git clone https://github.com/postcss/postcss-plugin-boilerplate.git
+    ```
 
 2. Execute the wizard script. It will ask you a few questions
    and fill all files with your data.
 
-```sh
-node ./postcss-plugin-boilerplate/start
-```
+    ```sh
+    node ./postcss-plugin-boilerplate/start
+    ```
 
-Call it with `--yarn` argument, if you prefer [yarn](https://yarnpkg.com/)
-package manager:
+    Call it with `--yarn` argument, if you prefer [yarn](https://yarnpkg.com/)
+    package manager:
 
-```sh
-node ./postcss-plugin-boilerplate/start --yarn
-```
+    ```sh
+    node ./postcss-plugin-boilerplate/start --yarn
+    ```
 
-Or use `--no-install` if you want to skip dependencies installation.
+    Or use `--no-install` if you want to skip dependencies installation.
 
 3. Your plugin repository will now have a clean Git history.
 [Create the GitHub repository](https://github.com/new)
