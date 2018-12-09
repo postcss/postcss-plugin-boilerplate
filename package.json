@@ -7,6 +7,9 @@
     "css",
     "postcss-plugin"KEYWORDS
   ],
+  "scripts": {
+    "test": "jest && eslint *.js"
+  },
   "author": "AUTHOR_NAME <AUTHOR_EMAIL>",
   "license": "MIT",
   "repository": "GITHUB_NAME/PLUGIN_NAME",
@@ -15,21 +18,24 @@
   },
   "homepage": "https://github.com/GITHUB_NAME/PLUGIN_NAME",
   "dependencies": {
-    "postcss": "^6.0.16"
+    "postcss": "^7.0.6"
   },
   "devDependencies": {
-    "eslint": "^4.18.2",
-    "eslint-config-postcss": "^2.0.2",
-    "jest": "^22.4.2"
-  },
-  "scripts": {
-    "test": "jest && eslint *.js"
+    "@logux/eslint-config": "^27.0.0",
+    "eslint": "^5.10.0",
+    "eslint-config-postcss": "^3.0.7",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-es5": "^1.3.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.1.2",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^23.6.0"
   },
   "eslintConfig": {
-    "extends": "eslint-config-postcss/es5",
-    "env": {
-      "jest": true
-    }
+    "extends": "eslint-config-postcss/es5"
   },
   "jest": {
     "testEnvironment": "node"

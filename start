@@ -11,182 +11,181 @@ var questionCallback = null;
 var lastQuestion     = 0;
 
 process.stdin.on('data', function (text) {
-    questionCallback(text.trim());
+  questionCallback(text.trim());
 });
 
 var noInstall = process.argv.some(function (i) {
-    return i === '--no-install';
+  return i === '--no-install';
 });
 var useYarn = process.argv.some(function (i) {
-    return i === '--yarn';
+  return i === '--yarn';
 });
 
 var questions = {
-    AUTHOR_NAME:  'Your name: ',
-    AUTHOR_EMAIL: 'Your email: ',
-    GITHUB_NAME:  'GitHub username: ',
-    PLUGIN_NAME:  'Plugin name: postcss-',
-    PLUGIN_DESC:  '\nFinish sentence with plugin description:\nPostCSS plugin ',
-    KEYWORDS:     '\nFinish plugin keywords:\npostcss, css, postcss-plugin, '
+  AUTHOR_NAME:  'Your name: ',
+  AUTHOR_EMAIL: 'Your email: ',
+  GITHUB_NAME:  'GitHub username: ',
+  PLUGIN_NAME:  'Plugin name: postcss-',
+  PLUGIN_DESC:  '\nFinish sentence with plugin description:\nPostCSS plugin ',
+  KEYWORDS:     '\nFinish plugin keywords:\npostcss, css, postcss-plugin, '
 };
 var autodetects = {
-    AUTHOR_NAME:  'git config user.name',
-    AUTHOR_EMAIL: 'git config user.email'
+  AUTHOR_NAME:  'git config user.name',
+  AUTHOR_EMAIL: 'git config user.email'
 };
 var answers = {
-    YEAR: (new Date()).getFullYear()
+  YEAR: (new Date()).getFullYear()
 };
 
 function copyFileSync(source, target) {
-    var targetFile = target;
-    if ( fs.existsSync(target) ) {
-        if ( fs.lstatSync(target).isDirectory() ) {
-            targetFile = path.join( target, path.basename(source) );
-        }
+  var targetFile = target;
+  if ( fs.existsSync(target) ) {
+    if ( fs.lstatSync(target).isDirectory() ) {
+      targetFile = path.join( target, path.basename(source) );
     }
-    fs.writeFileSync(targetFile, fs.readFileSync(source));
+  }
+  fs.writeFileSync(targetFile, fs.readFileSync(source));
 }
 
 function copyFolderSync(source, target) {
-    var files = [];
-    if ( !fs.existsSync(target) ) fs.mkdirSync(target);
-    if ( fs.lstatSync(source).isDirectory() ) {
-        files = fs.readdirSync(source);
-        files.forEach(function (file) {
-            var targetFile = path.join(target, file);
-            var curSource = path.join(source, file);
-            if ( fs.lstatSync(curSource).isDirectory() ) {
-                copyFolderSync(curSource, targetFile);
-            } else {
-                copyFileSync(curSource, target);
-            }
-        });
-    }
+  var files = [];
+  if ( !fs.existsSync(target) ) fs.mkdirSync(target);
+  if ( fs.lstatSync(source).isDirectory() ) {
+    files = fs.readdirSync(source);
+    files.forEach(function (file) {
+      var targetFile = path.join(target, file);
+      var curSource = path.join(source, file);
+      if ( fs.lstatSync(curSource).isDirectory() ) {
+        copyFolderSync(curSource, targetFile);
+      } else {
+        copyFileSync(curSource, target);
+      }
+    });
+  }
 }
 
 function fillFiles(dir) {
-    fs.readdirSync(dir).forEach(function (file) {
-        if ( file === '.git' ) return;
+  fs.readdirSync(dir).forEach(function (file) {
+    if ( file === '.git' ) return;
 
-        var filepath = path.join(dir, file);
-        if ( fs.lstatSync(filepath).isDirectory() ) {
-            fillFiles(filepath);
+    var filepath = path.join(dir, file);
+    if ( fs.lstatSync(filepath).isDirectory() ) {
+      fillFiles(filepath);
 
-        } else {
-            var content = fs.readFileSync(filepath).toString();
-            for ( var code in answers ) {
-                while ( content.indexOf(code) !== -1 ) {
-                    content = content.replace(code, answers[code]);
-                }
-            }
-            fs.writeFileSync(filepath, content);
+    } else {
+      var content = fs.readFileSync(filepath).toString();
+      for ( var code in answers ) {
+        while ( content.indexOf(code) !== -1 ) {
+          content = content.replace(code, answers[code]);
         }
-    });
+      }
+      fs.writeFileSync(filepath, content);
+    }
+  });
 }
 
 function cleanRepo(dir, callback) {
-    var readme = path.join(dir, 'README.md');
-    fs.unlinkSync(readme);
-    fs.renameSync(readme + '.example', readme);
-    fs.unlinkSync(path.join(dir, 'start'));
-    deleteFolderRecursive(path.join(dir, '.git'));
-    callback();
+  var readme = path.join(dir, 'README.md');
+  fs.unlinkSync(readme);
+  fs.renameSync(readme + '.example', readme);
+  fs.unlinkSync(path.join(dir, 'start'));
+  deleteFolderRecursive(path.join(dir, '.git'));
+  callback();
 }
 
 function deleteFolderRecursive(dir) {
-    if (fs.existsSync(dir)) {
-        fs.readdirSync(dir).forEach(function (file) {
-            var current = path.join(dir, file);
-            if (fs.lstatSync(current).isDirectory()) {
-                deleteFolderRecursive(current);
-            } else {
-                fs.unlinkSync(current);
-            }
-        });
-        fs.rmdirSync(dir);
-    }
+  if (fs.existsSync(dir)) {
+    fs.readdirSync(dir).forEach(function (file) {
+      var current = path.join(dir, file);
+      if (fs.lstatSync(current).isDirectory()) {
+        deleteFolderRecursive(current);
+      } else {
+        fs.unlinkSync(current);
+      }
+    });
+    fs.rmdirSync(dir);
+  }
 }
 
 function initProject(dir, callback) {
-    var command = 'cd "' + dir + '" && git init && ';
-    if (noInstall) {
-        callback()
+  var command = 'cd "' + dir + '" && git init && ';
+  if (noInstall) {
+    callback()
+  } else {
+    if (useYarn) {
+      process.stdout.write('\nInstalling yarn packages...');
+      command += 'yarn install'
     } else {
-        if (useYarn) {
-            process.stdout.write('\nInstalling yarn packages...');
-            command += 'yarn install'
-        } else {
-            process.stdout.write('\nInstalling npm packages...');
-            command += 'npm install'
-        }
-        exec(command, callback);
+      process.stdout.write('\nInstalling npm packages...');
+      command += 'npm install'
     }
+    exec(command, callback);
+  }
 }
 
 function autodetect(code, callback) {
-    var command = autodetects[code];
-    if ( !command ) return callback();
+  var command = autodetects[code];
+  if ( !command ) return callback();
 
-    try {
-        exec(command, function (_, stdout) {
-            var value = stdout.trim();
-            if ( value ) {
-                process.stdout.write(questions[code] + value + '\n');
-                answers[code] = value;
-                lastQuestion += 1;
-                nextQuestion();
-            } else {
-                callback();
-            }
-        });
-    } catch (error) {
+  try {
+    exec(command, function (_, stdout) {
+      var value = stdout.trim();
+      if ( value ) {
+        process.stdout.write(questions[code] + value + '\n');
+        answers[code] = value;
+        lastQuestion += 1;
+        nextQuestion();
+      } else {
         callback();
-    }
+      }
+    });
+  } catch (error) {
+    callback();
+  }
 }
 
 function nextQuestion() {
-    var code = Object.keys(questions)[lastQuestion];
-    if ( code ) {
-        autodetect(code, function () {
-            process.stdout.write(questions[code]);
-            questionCallback = function (result) {
-                if ( result === '' ) {
-                    nextQuestion();
-                } else {
-                    answers[code] = result;
-                    lastQuestion += 1;
-                    nextQuestion();
-                }
-            };
-        });
+  var code = Object.keys(questions)[lastQuestion];
+  if ( code ) {
+    autodetect(code, function () {
+      process.stdout.write(questions[code]);
+      questionCallback = function (result) {
+        if ( result === '' ) {
+          nextQuestion();
+        } else {
+          answers[code] = result;
+          lastQuestion += 1;
+          nextQuestion();
+        }
+      };
+    });
 
-    } else {
-        answers.PLUGIN_NAME = 'postcss-' + answers.PLUGIN_NAME;
-        answers.PLUGIN_TITLE = answers.PLUGIN_NAME
-            .replace(/-\w/g, function (str) {
-                return ' ' + str[1].toUpperCase();
-            })
-            .replace(/^postcss/, 'PostCSS');
-        answers.KEYWORDS = ',\n    ' + answers.KEYWORDS
-            .split(',')
-            .map(function (i) {
-                return '"' + i.trim() + '"';
-            })
-            .join(',\n    ');
+  } else {
+    answers.PLUGIN_NAME = 'postcss-' + answers.PLUGIN_NAME;
+    answers.PLUGIN_TITLE = answers.PLUGIN_NAME
+      .replace(/-\w/g, function (str) {
+          return ' ' + str[1].toUpperCase();
+      })
+      .replace(/^postcss/, 'PostCSS');
+    answers.KEYWORDS = ',\n    ' + answers.KEYWORDS
+      .split(',')
+      .map(function (i) {
+          return '"' + i.trim() + '"';
+      })
+      .join(',\n    ');
 
-        var dir = path.join(__dirname, '..', answers.PLUGIN_NAME);
-        copyFolderSync(__dirname, dir);
-        fillFiles(dir);
-        cleanRepo(dir, function () {
-            initProject(dir, function () {
-                process.stdout.write(
-                    '\nDone. Remove this dir and continue work in ' +
-                    '../' + answers.PLUGIN_NAME + '/\n');
-                process.exit(0);
-            });
-        });
-}
-
+    var dir = path.join(__dirname, '..', answers.PLUGIN_NAME);
+    copyFolderSync(__dirname, dir);
+    fillFiles(dir);
+    cleanRepo(dir, function () {
+      initProject(dir, function () {
+        process.stdout.write(
+          '\nDone. Remove this dir and continue work in ' +
+          '../' + answers.PLUGIN_NAME + '/\n');
+        process.exit(0);
+      });
+    });
+  }
 }
 
 nextQuestion();
