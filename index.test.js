@@ -11,7 +11,7 @@ function run (input, output, opts) {
 
 /* Write tests here
 
-it('does something', () => {
+it('does something', function () {
   return run('a{ }', 'a{ }', { })
 })
 
