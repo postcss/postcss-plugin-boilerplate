@@ -5,7 +5,7 @@
   "keywords": [
     "postcss",
     "css",
-    "postcss-plugin"KEYWORDS
+    "postcss-plugin"
   ],
   "scripts": {
     "test": "jest && eslint *.js"
