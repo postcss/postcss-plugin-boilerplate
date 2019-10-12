@@ -8,17 +8,13 @@
     "postcss-plugin"KEYWORDS
   ],
   "scripts": {
-    "test": "jest && eslint *.js"
+    "test": "jest && eslint ."
   },
   "author": "AUTHOR_NAME <AUTHOR_EMAIL>",
   "license": "MIT",
   "repository": "GITHUB_NAME/PLUGIN_NAME",
-  "bugs": {
-    "url": "https://github.com/GITHUB_NAME/PLUGIN_NAME/issues"
-  },
-  "homepage": "https://github.com/GITHUB_NAME/PLUGIN_NAME",
   "dependencies": {
-    "postcss": "^7.0.6"
+    "postcss": "^7.0.18"
   },
   "devDependencies": {
     "@logux/eslint-config": "^27.0.0",
