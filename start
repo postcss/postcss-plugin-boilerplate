@@ -1,191 +1,192 @@
 #!/usr/bin/env node
 
-var exec = require('child_process').exec;
-var path = require('path');
-var fs   = require('fs');
+let {
+  existsSync, lstatSync, writeFileSync, readFileSync,
+  mkdirSync, readdirSync, unlinkSync, renameSync, rmdirSync
+} = require('fs')
+let { basename, join } = require('path')
+let { exec } = require('child_process')
 
-process.stdin.resume();
-process.stdin.setEncoding('utf8');
+process.stdin.resume()
+process.stdin.setEncoding('utf8')
 
-var questionCallback = null;
-var lastQuestion     = 0;
+let questionCallback = null
+let lastQuestion = 0
 
-process.stdin.on('data', function (text) {
-  questionCallback(text.trim());
-});
+process.stdin.on('data', text => {
+  questionCallback(text.trim())
+})
 
-var noInstall = process.argv.some(function (i) {
-  return i === '--no-install';
-});
-var useYarn = process.argv.some(function (i) {
-  return i === '--yarn';
-});
+let noInstall = process.argv.includes('--no-install')
+let useYarn = process.argv.includes('--yarn')
 
-var questions = {
-  AUTHOR_NAME:  'Your name: ',
+let questions = {
+  AUTHOR_NAME: 'Your name: ',
   AUTHOR_EMAIL: 'Your email: ',
-  GITHUB_NAME:  'GitHub username: ',
-  PLUGIN_NAME:  'Plugin name: postcss-',
-  PLUGIN_DESC:  '\nFinish sentence with plugin description:\nPostCSS plugin ',
-  KEYWORDS:     '\nFinish plugin keywords:\npostcss, css, postcss-plugin, '
-};
-var autodetects = {
-  AUTHOR_NAME:  'git config user.name',
+  GITHUB_NAME: 'GitHub username: ',
+  PLUGIN_NAME: 'Plugin name: postcss-',
+  PLUGIN_DESC: '\nFinish sentence with plugin description:\nPostCSS plugin ',
+  KEYWORDS: '\nFinish plugin keywords:\npostcss, css, postcss-plugin, '
+}
+let autodetects = {
+  AUTHOR_NAME: 'git config user.name',
   AUTHOR_EMAIL: 'git config user.email'
-};
-var answers = {
+}
+let answers = {
   YEAR: (new Date()).getFullYear()
-};
+}
 
-function copyFileSync(source, target) {
-  var targetFile = target;
-  if ( fs.existsSync(target) ) {
-    if ( fs.lstatSync(target).isDirectory() ) {
-      targetFile = path.join( target, path.basename(source) );
+function copyFileSync (source, target) {
+  let targetFile = target
+  if (existsSync(target)) {
+    if (lstatSync(target).isDirectory()) {
+      targetFile = join(target, basename(source))
     }
   }
-  fs.writeFileSync(targetFile, fs.readFileSync(source));
+  writeFileSync(targetFile, readFileSync(source))
 }
 
-function copyFolderSync(source, target) {
-  var files = [];
-  if ( !fs.existsSync(target) ) fs.mkdirSync(target);
-  if ( fs.lstatSync(source).isDirectory() ) {
-    files = fs.readdirSync(source);
-    files.forEach(function (file) {
-      var targetFile = path.join(target, file);
-      var curSource = path.join(source, file);
-      if ( fs.lstatSync(curSource).isDirectory() ) {
-        copyFolderSync(curSource, targetFile);
+function copyFolderSync (source, target) {
+  let files = []
+  if (!existsSync(target)) mkdirSync(target)
+  if (lstatSync(source).isDirectory()) {
+    files = readdirSync(source)
+    files.forEach(file => {
+      let targetFile = join(target, file)
+      let curSource = join(source, file)
+      if (lstatSync(curSource).isDirectory()) {
+        copyFolderSync(curSource, targetFile)
       } else {
-        copyFileSync(curSource, target);
+        copyFileSync(curSource, target)
       }
-    });
+    })
   }
 }
 
-function fillFiles(dir) {
-  fs.readdirSync(dir).forEach(function (file) {
-    if ( file === '.git' ) return;
+function fillFiles (dir) {
+  readdirSync(dir).forEach(file => {
+    if (file === '.git') return
 
-    var filepath = path.join(dir, file);
-    if ( fs.lstatSync(filepath).isDirectory() ) {
-      fillFiles(filepath);
-
+    let filepath = join(dir, file)
+    if (lstatSync(filepath).isDirectory()) {
+      fillFiles(filepath)
     } else {
-      var content = fs.readFileSync(filepath).toString();
-      for ( var code in answers ) {
-        while ( content.indexOf(code) !== -1 ) {
-          content = content.replace(code, answers[code]);
+      let content = readFileSync(filepath).toString()
+      for (let code in answers) {
+        while (content.includes(code)) {
+          content = content.replace(code, answers[code])
         }
       }
-      fs.writeFileSync(filepath, content);
+      writeFileSync(filepath, content)
     }
-  });
+  })
 }
 
-function cleanRepo(dir, callback) {
-  var readme = path.join(dir, 'README.md');
-  fs.unlinkSync(readme);
-  fs.renameSync(readme + '.example', readme);
-  fs.unlinkSync(path.join(dir, 'start'));
-  deleteFolderRecursive(path.join(dir, '.git'));
-  callback();
+function cleanRepo (dir, callback) {
+  let readme = join(dir, 'README.md')
+  unlinkSync(readme)
+  renameSync(readme + '.example', readme)
+  unlinkSync(join(dir, 'start'))
+  deleteFolderRecursive(join(dir, '.git'))
+  callback()
 }
 
-function deleteFolderRecursive(dir) {
-  if (fs.existsSync(dir)) {
-    fs.readdirSync(dir).forEach(function (file) {
-      var current = path.join(dir, file);
-      if (fs.lstatSync(current).isDirectory()) {
-        deleteFolderRecursive(current);
+function deleteFolderRecursive (dir) {
+  if (existsSync(dir)) {
+    readdirSync(dir).forEach(file => {
+      let current = join(dir, file)
+      if (lstatSync(current).isDirectory()) {
+        deleteFolderRecursive(current)
       } else {
-        fs.unlinkSync(current);
+        unlinkSync(current)
       }
-    });
-    fs.rmdirSync(dir);
+    })
+    rmdirSync(dir)
   }
 }
 
-function initProject(dir, callback) {
-  var command = 'cd "' + dir + '" && git init && ';
+function initProject (dir, callback) {
+  let command = 'cd "' + dir + '" && git init && '
   if (noInstall) {
     callback()
   } else {
     if (useYarn) {
-      process.stdout.write('\nInstalling yarn packages...');
+      process.stdout.write('\nInstalling yarn packages...')
       command += 'yarn install'
     } else {
-      process.stdout.write('\nInstalling npm packages...');
+      process.stdout.write('\nInstalling npm packages...')
       command += 'npm install'
     }
-    exec(command, callback);
+    exec(command, callback)
   }
 }
 
-function autodetect(code, callback) {
-  var command = autodetects[code];
-  if ( !command ) return callback();
+function autodetect (code, callback) {
+  let command = autodetects[code]
+  if (!command) {
+    callback()
+    return
+  }
 
   try {
-    exec(command, function (_, stdout) {
-      var value = stdout.trim();
-      if ( value ) {
-        process.stdout.write(questions[code] + value + '\n');
-        answers[code] = value;
-        lastQuestion += 1;
-        nextQuestion();
+    exec(command, (_, stdout) => {
+      let value = stdout.trim()
+      if (value) {
+        process.stdout.write(questions[code] + value + '\n')
+        answers[code] = value
+        lastQuestion += 1
+        nextQuestion()
       } else {
-        callback();
+        callback()
       }
-    });
+    })
   } catch (error) {
-    callback();
+    callback()
   }
 }
 
-function nextQuestion() {
-  var code = Object.keys(questions)[lastQuestion];
-  if ( code ) {
-    autodetect(code, function () {
-      process.stdout.write(questions[code]);
+function nextQuestion () {
+  let code = Object.keys(questions)[lastQuestion]
+  if (code) {
+    autodetect(code, () => {
+      process.stdout.write(questions[code])
       questionCallback = function (result) {
-        if ( result === '' ) {
-          nextQuestion();
+        if (result === '') {
+          nextQuestion()
         } else {
-          answers[code] = result;
-          lastQuestion += 1;
-          nextQuestion();
+          answers[code] = result
+          lastQuestion += 1
+          nextQuestion()
         }
-      };
-    });
-
+      }
+    })
   } else {
-    answers.PLUGIN_NAME = 'postcss-' + answers.PLUGIN_NAME;
+    answers.PLUGIN_NAME = 'postcss-' + answers.PLUGIN_NAME
     answers.PLUGIN_TITLE = answers.PLUGIN_NAME
-      .replace(/-\w/g, function (str) {
-          return ' ' + str[1].toUpperCase();
+      .replace(/-\w/g, str => {
+        return ' ' + str[1].toUpperCase()
       })
-      .replace(/^postcss/, 'PostCSS');
+      .replace(/^postcss/, 'PostCSS')
     answers.KEYWORDS = ',\n    ' + answers.KEYWORDS
       .split(',')
-      .map(function (i) {
-          return '"' + i.trim() + '"';
+      .map(i => {
+        return '"' + i.trim() + '"'
       })
-      .join(',\n    ');
+      .join(',\n    ')
 
-    var dir = path.join(__dirname, '..', answers.PLUGIN_NAME);
-    copyFolderSync(__dirname, dir);
-    fillFiles(dir);
-    cleanRepo(dir, function () {
-      initProject(dir, function () {
+    let dir = join(__dirname, '..', answers.PLUGIN_NAME)
+    copyFolderSync(__dirname, dir)
+    fillFiles(dir)
+    cleanRepo(dir, () => {
+      initProject(dir, () => {
         process.stdout.write(
           '\nDone. Remove this dir and continue work in ' +
-          '../' + answers.PLUGIN_NAME + '/\n');
-        process.exit(0);
-      });
-    });
+          '../' + answers.PLUGIN_NAME + '/\n'
+        )
+        process.exit(0)
+      })
+    })
   }
 }
 
-nextQuestion();
+nextQuestion()
