@@ -4,7 +4,7 @@ let {
   existsSync, lstatSync, writeFileSync, readFileSync,
   mkdirSync, readdirSync, unlinkSync, renameSync, rmdirSync
 } = require('fs')
-let { basename, join } = require('path')
+let { basename, join, extname } = require('path')
 let { exec } = require('child_process')
 
 process.stdin.resume()
@@ -52,8 +52,11 @@ function copyFolderSync (source, target) {
   if (lstatSync(source).isDirectory()) {
     files = readdirSync(source)
     files.forEach(file => {
-      let targetFile = join(target, file)
       let curSource = join(source, file)
+      if (extname(file) == '.tpl') {
+        file = file.split('.').slice(0, -1).join('.')
+      }
+      let targetFile = join(target, file)
       if (lstatSync(curSource).isDirectory()) {
         copyFolderSync(curSource, targetFile)
       } else {
