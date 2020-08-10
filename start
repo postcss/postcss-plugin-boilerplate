@@ -180,6 +180,7 @@ function nextQuestion () {
     let dir = join(__dirname, '..', answers.PLUGIN_NAME)
     copyFolderSync(__dirname, dir)
     fillFiles(dir)
+    renameSync(join(dir, 'package.json.tpl'), join(dir, 'package.json'))
     cleanRepo(dir, () => {
       initProject(dir, () => {
         process.stdout.write(
