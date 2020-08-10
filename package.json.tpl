@@ -8,37 +8,45 @@
     "postcss-plugin"KEYWORDS
   ],
   "scripts": {
-    "test": "jest && eslint ."
+    "test": "jest-ci --coverage"
   },
   "author": "AUTHOR_NAME <AUTHOR_EMAIL>",
   "license": "MIT",
   "repository": "GITHUB_NAME/PLUGIN_NAME",
-  "dependencies": {
-    "postcss": "^7.0.18"
+  "engines": {
+    "node": ">=10.0.0"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^33.0.0",
-    "eslint": "^6.5.1",
-    "eslint-config-postcss": "^3.0.7",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-es5": "^1.4.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^22.19.0",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-prefer-let": "^1.0.1",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-security": "^1.4.0",
-    "eslint-plugin-standard": "^4.0.1",
-    "eslint-plugin-unicorn": "^12.1.0",
-    "jest": "^24.9.0"
+    "clean-publish": "^1.1.8",
+    "eslint": "^7.6.0",
+    "eslint-ci": "^1.0.0",
+    "eslint-plugin-jest": "^23.20.0",
+    "husky": "^4.2.5",
+    "jest": "^26.2.2",
+    "jest-ci": "^0.1.1",
+    "lint-staged": "^10.2.11",
+    "postcss": "^8.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix"
   },
   "eslintConfig": {
-    "extends": "eslint-config-postcss"
-  },
-  "engines": {
-    "node": ">=8.0.0"
+    "extends": [
+      "eslint:recommended",
+      "plugin:jest/recommended"
+    ]
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "coverageThreshold": {
+      "global": {
+        "statements": 100
+      }
+    }
   }
 }

@@ -2,7 +2,7 @@
 
 <img align="right" width="135" height="95"
      title="Philosopher’s stone, logo of PostCSS"
-     src="http://postcss.github.io/postcss/logo-leftp.svg">
+     src="https://postcss.org/logo-leftp.svg">
 
 Сreate new PostCSS plugins in a few steps:
 
@@ -42,9 +42,12 @@ and push your project there.
 
 8. Add options descriptions if your plugin has them.
 
-9. Fill `CHANGELOG.md` with initial version and release it to npm.
+9. Fill `CHANGELOG.md` with initial version.
 
-10. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to the
+10. Release by calling `npx clean-publish`
+    (this tool will remove development configs from `package.json`).
+
+11. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to the
 [Plugins list](https://github.com/postcss/postcss/blob/master/docs/plugins.md)
 and send a pull request.
 
