@@ -8,7 +8,7 @@
     "postcss-plugin"KEYWORDS
   ],
   "scripts": {
-    "test": "jest-ci --coverage"
+    "test": "jest-ci --coverage && eslint-ci ."
   },
   "author": "AUTHOR_NAME <AUTHOR_EMAIL>",
   "license": "MIT",
@@ -36,10 +36,20 @@
     "*.js": "eslint --fix"
   },
   "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2017
+    },
+    "env": {
+      "node": true,
+      "es6": true
+    },
     "extends": [
       "eslint:recommended",
       "plugin:jest/recommended"
-    ]
+    ],
+    "rules": {
+      "jest/expect-expect": "off"
+    }
   },
   "jest": {
     "testEnvironment": "node",
