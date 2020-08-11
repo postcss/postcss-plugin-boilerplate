@@ -12,7 +12,15 @@ module.exports = (opts = { }) => {
 
     /*
     Declaration (decl, postcss) {
-      // Transform declaration here
+      // The faster way to find Declaration node
+    }
+    */
+
+    /*
+    Declaration: {
+      color: (decl, postcss) {
+        // The fastest way find Declaration node if you knwo property name
+      }
     }
     */
   }
