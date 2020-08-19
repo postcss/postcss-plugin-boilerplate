@@ -38,9 +38,10 @@ let answers = {
 
 function checkCwd () {
   if (process.cwd() === __dirname) {
-    process.stdout.write(
-      '\nPlease run this script from the directory above' +
-      '\ncd .. && ./' + basename(__dirname) + '/' + basename(__filename) + '\n'
+    process.stderr.write(
+      '\n' +
+      'Please run this script from the directory above:\n' +
+      'cd .. && ./' + basename(__dirname) + '/' + basename(__filename) + '\n'
     );
     process.exit(1);
   }
