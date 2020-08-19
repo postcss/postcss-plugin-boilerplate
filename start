@@ -36,6 +36,16 @@ let answers = {
   YEAR: (new Date()).getFullYear()
 }
 
+function checkCwd () {
+  if (process.cwd() === __dirname) {
+    process.stdout.write(
+      '\nPlease run this script from the directory above' +
+      '\ncd .. && ./' + basename(__dirname) + '/' + basename(__filename) + '\n'
+    );
+    process.exit(1);
+  }
+}
+
 function copyFileSync (source, target) {
   let targetFile = target
   if (existsSync(target)) {
@@ -193,4 +203,5 @@ function nextQuestion () {
   }
 }
 
+checkCwd()
 nextQuestion()
