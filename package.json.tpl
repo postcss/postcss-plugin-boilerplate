@@ -16,6 +16,9 @@
   "engines": {
     "node": ">=10.0.0"
   },
+  "peerDependencies": {
+    "postcss": "^8.0.0"
+  },
   "devDependencies": {
     "clean-publish": "^1.1.8",
     "eslint": "^7.6.0",
