@@ -17,19 +17,19 @@
     "node": ">=10.0.0"
   },
   "peerDependencies": {
-    "postcss": "^8.0.2"
+    "postcss": "^8.1.0"
   },
   "devDependencies": {
     "clean-publish": "^1.1.8",
-    "eslint": "^7.9.0",
+    "eslint": "^7.10.0",
     "eslint-ci": "^1.0.0",
-    "eslint-plugin-jest": "^24.0.1",
+    "eslint-plugin-jest": "^24.0.2",
     "husky": "^4.3.0",
     "jest": "^26.4.2",
     "jest-ci": "^0.1.1",
     "jest-cli": "^26.4.2",
-    "lint-staged": "^10.3.0",
-    "postcss": "^8.0.2"
+    "lint-staged": "^10.4.0",
+    "postcss": "^8.1.0"
   },
   "husky": {
     "hooks": {
