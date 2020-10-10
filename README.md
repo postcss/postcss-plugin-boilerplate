@@ -27,6 +27,16 @@
     ```
 
     Or use `--no-install` if you want to skip dependencies installation.
+    
+    > ⚠️ **Note on resolutions**
+    >
+    > If you plan on using `yarn`, you don't need to do this.
+    >
+    > Otherwise use following steps to resolve.
+    > 1. To the `scripts` section in your `package.json` add the line `"preinstall" : "npx npm-force-resolutions"`.
+    > 2. Remove `node-modules`. In Linux based systems, you can do so by using `rm -rf node-modules`.
+    > 3. Use `npm i` to install the dependencies again.
+
 
 3. Your plugin repository will now have a clean Git history.
 [Create the GitHub repository](https://github.com/new)
