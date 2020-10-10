@@ -31,6 +31,9 @@
     "lint-staged": "^10.4.0",
     "postcss": "^8.1.0"
   },
+  "resolutions": {
+    "yargs-parser": "^13.1.2"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
