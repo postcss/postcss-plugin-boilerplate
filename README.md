@@ -48,7 +48,7 @@ and push your project there.
     (this tool will remove development configs from `package.json`).
 
 11. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to the
-[Plugins list](https://github.com/postcss/postcss/blob/master/docs/plugins.md)
+[Plugins list](https://github.com/postcss/postcss/blob/main/docs/plugins.md)
 and send a pull request.
 
 11. Follow [@PostCSS](https://twitter.com/postcss) to get the latest updates.
