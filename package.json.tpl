@@ -8,7 +8,7 @@
     "postcss-plugin"KEYWORDS
   ],
   "scripts": {
-    "test": "jest-ci --coverage && eslint-ci ."
+    "test": "jest --coverage && eslint ."
   },
   "author": "AUTHOR_NAME <AUTHOR_EMAIL>",
   "license": "MIT",
