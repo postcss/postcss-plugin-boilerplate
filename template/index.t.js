@@ -1,9 +1,11 @@
-module.exports = (opts = { }) => {
-
+/**
+ * @type {import('postcss').PluginCreator}
+ */
+module.exports = (opts = {}) => {
   // Work with options here
 
   return {
-    postcssPlugin: 'PLUGIN_NAME',
+    postcssPlugin: '${pluginName}',
     /*
     Root (root, postcss) {
       // Transform CSS AST here
@@ -25,4 +27,5 @@ module.exports = (opts = { }) => {
     */
   }
 }
+
 module.exports.postcss = true
