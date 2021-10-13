@@ -1,11 +1,29 @@
 let { mock } = require('gogen')
+let { emitter } = require('./.gogenrc.js')
 
 let mockAnswers = {
-  description: 'My plugin',
-  gitHubName: ':ghname',
+  description: 'for test',
+  gitHubName: ':name',
 }
 
+let injectAnswers = (answers) => {
+  // https://github.com/enquirer/enquirer/blob/master/lib/prompts/snippet.js
+  emitter.on('prompt:run', async (prompt) => {
+    await prompt.keypress(answers.description)
+    await prompt.down()
+    await prompt.keypress(answers.ghname)
+    await prompt.submit()
+    // it seems buggy in jest
+    await prompt.submit()
+  })
+}
+
+afterEach(() => {
+  emitter.removeAllListeners()
+})
+
 test('basic', async () => {
+  injectAnswers(mockAnswers)
   let { files, readFile } = await mock(__dirname, 'postcss-foo', {
     answers: mockAnswers,
   })
@@ -25,13 +43,14 @@ Array [
 `)
   expect(JSON.parse(readFile('package.json'))).toMatchObject({
     name: 'postcss-foo',
-    description: 'My plugin',
-    repository: ':ghname/postcss-foo',
+    description: `PostCSS plugin ${mockAnswers.description}`,
+    repository: `${mockAnswers.gitHubName}/postcss-foo`,
     author: ':name <:email>',
   })
 })
 
 test('add prefix', async () => {
+  injectAnswers(mockAnswers)
   let { readFile } = await mock(__dirname, 'foo', {
     answers: mockAnswers,
   })

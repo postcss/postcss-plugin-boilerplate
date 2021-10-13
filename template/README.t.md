@@ -1,6 +1,8 @@
 # ${pluginName}
 
-${description}.
+[PostCSS] plugin ${description}.
+
+[PostCSS]: https://github.com/postcss/postcss
 
 ```css
 .foo {

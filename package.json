@@ -36,6 +36,7 @@
     }
   },
   "dependencies": {
+    "enquirer": "^2.3.6",
     "gogen": "^2.2.0"
   },
   "devDependencies": {

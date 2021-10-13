@@ -1,8 +1,8 @@
 {
   "name": "${pluginName}",
   "version": "0.0.0",
-  "description": "${description}",
-  "keywords": ["postcss", "css", "${pluginName}"],
+  "description": "PostCSS plugin ${description}",
+  "keywords": ["postcss", "css", "postcss-plugin", "${pluginName}"],
   "scripts": {
     "test": "jest --coverage && eslint ."
   },
