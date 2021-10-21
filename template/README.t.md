@@ -1,12 +1,12 @@
-# PLUGIN_TITLE
+# ${pluginName}
 
-[PostCSS] plugin PLUGIN_DESC.
+[PostCSS] plugin ${description}.
 
 [PostCSS]: https://github.com/postcss/postcss
 
 ```css
 .foo {
-    /* Input example */
+  /* Input example */
 }
 ```
 
@@ -21,7 +21,7 @@
 **Step 1:** Install plugin:
 
 ```sh
-npm install --save-dev postcss PLUGIN_NAME
+npm install --save-dev postcss ${pluginName}
 ```
 
 **Step 2:** Check you project for existed PostCSS config: `postcss.config.js`
@@ -36,7 +36,7 @@ and set this plugin in settings.
 ```diff
 module.exports = {
   plugins: [
-+   require('PLUGIN_NAME'),
++   require('${pluginName}'),
     require('autoprefixer')
   ]
 }

@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright YEAR AUTHOR_NAME <AUTHOR_EMAIL>
+Copyright ${currentYear} ${authorName} <${authorEmail}>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in

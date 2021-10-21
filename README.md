@@ -6,49 +6,43 @@
 
 Сreate new PostCSS plugins in a few steps:
 
-1. Clone this repository:
-
-    ```sh
-    git clone https://github.com/postcss/postcss-plugin-boilerplate.git
-    ```
-
-2. Execute the wizard script. It will ask you a few questions
+1. Execute the wizard script. It will ask you a few questions
    and fill all files with your data.
 
-    ```sh
-    node ./postcss-plugin-boilerplate/start
-    ```
+   ```sh
+   npx postcss-plugin-boilerplate <directory>
+   ```
 
-    Call it with `--yarn` argument, if you prefer [yarn](https://yarnpkg.com/)
-    package manager:
+   Call it with `--npm` argument, if you have [yarn](https://yarnpkg.com/) installed, but prefer to use npm as the package manager
+   (by default, it will automatically decide whether to use yarn or npm):
 
-    ```sh
-    node ./postcss-plugin-boilerplate/start --yarn
-    ```
+   ```sh
+   node postcss-plugin-boilerplate --npm <directory>
+   ```
 
-    Or use `--no-install` if you want to skip dependencies installation.
+   Or use `--no-install` if you want to skip dependencies installation.
 
-3. Your plugin repository will now have a clean Git history.
-[Create the GitHub repository](https://github.com/new)
-and push your project there.
+2. Your plugin repository will now have a clean Git history.
+   [Create the GitHub repository](https://github.com/new)
+   and push your project there.
 
-4. Add your project to [Travis CI](https://travis-ci.org).
+3. Add your project to [Travis CI](https://travis-ci.org).
 
-5. Write some code to `index.js` and tests to `index.test.js`.
+4. Write some code to `index.js` and tests to `index.test.js`.
 
-6. Execute `npm test` command
+5. Execute `npm test` command
 
-7. Add input and output CSS examples to `README.md`.
+6. Add input and output CSS examples to `README.md`.
 
-8. Add options descriptions if your plugin has them.
+7. Add options descriptions if your plugin has them.
 
-9. Fill `CHANGELOG.md` with initial version.
+8. Fill `CHANGELOG.md` with initial version.
 
-10. Release by calling `npx clean-publish`
-    (this tool will remove development configs from `package.json`).
+9. Release by calling `npx clean-publish`
+   (this tool will remove development configs from `package.json`).
 
-11. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to the
-[Plugins list](https://github.com/postcss/postcss/blob/main/docs/plugins.md)
-and send a pull request.
+10. Fork [PostCSS](https://github.com/postcss/postcss), add your plugin to the
+    [Plugins list](https://github.com/postcss/postcss/blob/main/docs/plugins.md)
+    and send a pull request.
 
 11. Follow [@PostCSS](https://twitter.com/postcss) to get the latest updates.

@@ -5,6 +5,6 @@ yarn.lock
 
 *.test.js
 .travis.yml
+.github
 .editorconfig
-/.github
 coverage/
