@@ -2,7 +2,7 @@
   "name": "postcss-plugin-boilerplate",
   "description": "PostCSS plugin boilerplate",
   "repository": "postcss/postcss-plugin-boilerplate",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "bin": "cli.js",
   "keywords": [
