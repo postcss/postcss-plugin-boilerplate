@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": "${gitHubName}/${pluginName}",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "peerDependencies": {
     "postcss": "^8.3.0"
