@@ -17,6 +17,7 @@
     "gogen": "^2.2.1"
   },
   "devDependencies": {
+    "clean-publish": "^3.4.2",
     "eslint": "^8.0.1"
   },
   "eslintConfig": {
