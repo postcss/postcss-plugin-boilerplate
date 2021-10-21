@@ -10,18 +10,14 @@
     "boilerplate"
   ],
   "scripts": {
-    "test": "jest"
+    "test": "eslint"
   },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "template"
-    ]
+  "dependencies": {
+    "enquirer": "^2.3.6",
+    "gogen": "^2.2.1"
   },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
-  },
-  "lint-staged": {
-    "*.js": "eslint --fix"
+  "devDependencies": {
+    "eslint": "^8.0.1"
   },
   "eslintConfig": {
     "parserOptions": {
@@ -38,16 +34,5 @@
     "rules": {
       "jest/expect-expect": "off"
     }
-  },
-  "dependencies": {
-    "enquirer": "^2.3.6",
-    "gogen": "^2.2.1"
-  },
-  "devDependencies": {
-    "eslint": "^8.0.1",
-    "eslint-plugin-jest": "^25.2.2",
-    "jest": "^27.3.1",
-    "lint-staged": "^11.2.3",
-    "simple-git-hooks": "^2.0.2"
   }
 }
