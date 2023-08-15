@@ -10,7 +10,7 @@
     "boilerplate"
   ],
   "scripts": {
-    "test": "eslint"
+    "test": "eslint ."
   },
   "dependencies": {
     "enquirer": "^2.4.1",
@@ -29,11 +29,10 @@
       "es6": true
     },
     "extends": [
-      "eslint:recommended",
-      "plugin:jest/recommended"
+      "eslint:recommended"
     ],
     "rules": {
-      "jest/expect-expect": "off"
+      "no-unused-vars": "off"
     }
   }
 }
