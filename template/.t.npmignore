@@ -4,7 +4,6 @@ package-lock.json
 yarn.lock
 
 *.test.js
-.travis.yml
 .github
 .editorconfig
 coverage/

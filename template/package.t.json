@@ -4,7 +4,8 @@
   "description": "PostCSS plugin ${description}",
   "keywords": ["postcss", "css", "postcss-plugin", "${pluginName}"],
   "scripts": {
-    "test": "uvu . '\\.test\\.js$' && eslint ."
+    "unit": "uvu . '\\.test\\.js$'",
+    "test": "npm run unit && eslint ."
   },
   "author": "${authorName} <${authorEmail}>",
   "license": "MIT",

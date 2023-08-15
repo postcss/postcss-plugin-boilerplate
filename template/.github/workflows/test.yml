@@ -1,9 +1,10 @@
 name: Test
 on:
   push:
+    - main
   pull_request:
-env:
-  FORCE_COLOR: 2
+permissions:
+  contents: read
 jobs:
   full:
     name: Node.js 15 Full
@@ -14,9 +15,10 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 15
+          node-version: 20
+          cache: npm
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: npm ci --ignore-scripts
       - name: Run tests
         run: yarn test
   short:
@@ -24,9 +26,7 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - 14
-          - 12
-          - 10
+          - 18
     name: Node.js ${{ matrix.node-version }} Quick
     steps:
       - name: Checkout the repository
@@ -35,7 +35,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+          cache: npm
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: npm ci --ignore-scripts
       - name: Run unit tests
-        run: npx jest
+        run: npm run unit
