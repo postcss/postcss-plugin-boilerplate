@@ -13,12 +13,12 @@
     "test": "eslint"
   },
   "dependencies": {
-    "enquirer": "^2.3.6",
-    "gogen": "^2.2.1"
+    "enquirer": "^2.4.1",
+    "gogen": "^2.3.0"
   },
   "devDependencies": {
-    "clean-publish": "^3.4.2",
-    "eslint": "^8.0.1"
+    "clean-publish": "^4.2.0",
+    "eslint": "^8.47.0"
   },
   "eslintConfig": {
     "parserOptions": {

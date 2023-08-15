@@ -1,10 +1,5 @@
-yarn-error.log
-npm-debug.log
-package-lock.json
-yarn.lock
+pnpm-lock.yaml
 
-*.test.js
-.travis.yml
 .editorconfig
-/.github
+.github/
 coverage/
