@@ -4,23 +4,21 @@
   "description": "PostCSS plugin ${description}",
   "keywords": ["postcss", "css", "postcss-plugin", "${pluginName}"],
   "scripts": {
-    "test": "jest --coverage && eslint ."
+    "test": "uvu . '\\.test\\.js$' && eslint ."
   },
   "author": "${authorName} <${authorEmail}>",
   "license": "MIT",
   "repository": "${gitHubName}/${pluginName}",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=18.0.0"
   },
   "peerDependencies": {
-    "postcss": "^8.3.0"
+    "postcss": "^8.4.27"
   },
   "devDependencies": {
-    "clean-publish": "^3.4.2",
-    "eslint": "^8.0.1",
-    "eslint-plugin-jest": "^25.2.2",
-    "jest": "^27.3.1",
-    "postcss": "^8.3.11"
+    "eslint": "^8.47.0",
+    "postcss": "^8.4.27",
+    "uvu": "^0.5.6"
   },
   "eslintConfig": {
     "parserOptions": {
@@ -30,16 +28,6 @@
       "node": true,
       "es6": true
     },
-    "extends": ["eslint:recommended", "plugin:jest/recommended"],
-    "rules": {
-      "jest/expect-expect": "off"
-    }
-  },
-  "jest": {
-    "coverageThreshold": {
-      "global": {
-        "statements": 100
-      }
-    }
+    "extends": ["eslint:recommended"]
   }
 }

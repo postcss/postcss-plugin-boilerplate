@@ -34,5 +34,13 @@
     "rules": {
       "no-unused-vars": "off"
     }
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "jsxSingleQuote": false,
+    "quoteProps": "consistent",
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none"
   }
 }
