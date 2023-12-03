@@ -4,7 +4,7 @@
   "description": "PostCSS plugin ${description}",
   "keywords": ["postcss", "css", "postcss-plugin", "${pluginName}"],
   "scripts": {
-    "unit": "uvu . '\\.test\\.js$'",
+    "unit": "node --test index.test.js",
     "test": "npm run unit && eslint ."
   },
   "author": "${authorName} <${authorEmail}>",
@@ -18,8 +18,7 @@
   },
   "devDependencies": {
     "eslint": "^8.47.0",
-    "postcss": "^8.4.27",
-    "uvu": "^0.5.6"
+    "postcss": "^8.4.27"
   },
   "eslintConfig": {
     "parserOptions": {

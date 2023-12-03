@@ -1,6 +1,6 @@
 const postcss = require('postcss')
-const { equal } = require('uvu/assert')
-const { test } = require('uvu')
+const { equal } = require('node:assert')
+const { test } = require('node:test')
 
 const plugin = require('./')
 
@@ -17,5 +17,3 @@ test('does something', async () => {
 })
 
 */
-
-test.run()
