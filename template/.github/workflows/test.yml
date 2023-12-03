@@ -8,7 +8,7 @@ permissions:
   contents: read
 jobs:
   full:
-    name: Node.js 15 Full
+    name: Node.js Latest Full
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
