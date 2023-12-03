@@ -1,5 +1,8 @@
 # Change Log
 
+## 3.0
+* Replaced `uvu` to `node --test`.
+
 ## 2.0.1
 * Fixed CI config.
 
