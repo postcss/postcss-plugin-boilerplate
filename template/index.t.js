@@ -20,7 +20,7 @@ module.exports = (opts = {}) => {
 
     /*
     Declaration: {
-      color: (decl, postcss) => {
+      'color': (decl, postcss) => {
         // The fastest way find Declaration node if you know property name
       }
     }
